@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -20,14 +21,18 @@ public class Album {
 	private String title;
 	private String imgUrl;
 
-	 @ManyToMany(mappedBy = "albums")
-	 private Set<Artist> artists = new HashSet<Artist>();
+	@ManyToMany(mappedBy = "albums", fetch = FetchType.EAGER)
+	private Set<Artist> artists = new HashSet<Artist>();
 
-	 @ManyToMany(mappedBy = "albums")
-	 private Set<Song> songs = new HashSet<Song>();
+	@ManyToMany(mappedBy = "albums", fetch = FetchType.EAGER)
+	private Set<Song> songs = new HashSet<Song>();
 
 	protected Album() {
 
+	}
+
+	public String toString() {
+		return title + " - " + imgUrl;
 	}
 
 	public Album(String title, String imgUrl) {
@@ -79,6 +84,5 @@ public class Album {
 			return false;
 		return true;
 	}
-	
-	
+
 }

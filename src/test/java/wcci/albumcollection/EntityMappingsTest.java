@@ -1,8 +1,9 @@
 package wcci.albumcollection;
 
-import static org.junit.Assert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,11 +38,21 @@ public class EntityMappingsTest {
 	private Song testSong = new Song("test-title", "test-link.com", "00:00");
 	private Album testAlbum = new Album("test-title", "testImg.com");
 	
+	@Before
+	public void saveTestEntitiesToRepos() {
+		artistRepo.save(testArtist);
+		albumRepo.save(testAlbum);
+		songRepo.save(testSong);
+		
+		entityManager.flush();
+		entityManager.clear();
+	}
+	
 	@Test
 	public void shouldSaveAndLoadAnArtist() {
-		artistRepo.save(testArtist);
-		entityManager.persist(testArtist);
-		entityManager.flush();
+//		artistRepo.save(testArtist);
+//		entityManager.persist(testArtist);
+//		entityManager.flush();
 		
 		Artist foundArtist = artistRepo.findById(testArtist.getId()).get();
 		assertThat(foundArtist, is(testArtist));
@@ -49,9 +60,9 @@ public class EntityMappingsTest {
 	
 	@Test
 	public void shouldSaveAndLoadAnSong() {
-		songRepo.save(testSong);
-		entityManager.persist(testSong);
-		entityManager.flush();
+//		songRepo.save(testSong);
+//		entityManager.persist(testSong);
+//		entityManager.flush();
 		
 		Song foundSong = songRepo.findById(testSong.getId()).get();
 		assertThat(foundSong, is(testSong));
@@ -59,14 +70,27 @@ public class EntityMappingsTest {
 	
 	@Test
 	public void shouldSaveAndLoadAnAlbum() {
-		albumRepo.save(testAlbum);
-		entityManager.persist(testAlbum);
-		entityManager.flush();
+//		albumRepo.save(testAlbum);
+//		entityManager.persist(testAlbum);
+//		entityManager.flush();
 		
 		Album foundAlbum = albumRepo.findById(testAlbum.getId()).get();
 		assertThat(foundAlbum, is(testAlbum));
 	} 
 	
+	@Test
+	public void songShouldHaveACollectionOfArtists() {
+		Song songFromRepo = songRepo.findById(testSong.getId()).get();
+		
+		songFromRepo.addArtist(testArtist);
+		songRepo.save(songFromRepo);
+		entityManager.flush();
+		entityManager.clear();
+		
+//		Song loadedSong = songRepo.findById(testSong.getId()).get();
+		
+		
+	}
 	
 
 }

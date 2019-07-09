@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -20,14 +21,18 @@ public class Artist {
 	private String name;
 	private String imgUrl;
 
-	 @ManyToMany
-	 private Set<Song> songs = new HashSet<Song>();
+	@ManyToMany(fetch = FetchType.EAGER)
+	private Set<Song> songs = new HashSet<Song>();
 
-	 @ManyToMany
-	 private Set<Album> albums = new HashSet<Album>();
+	@ManyToMany(fetch = FetchType.EAGER)
+	private Set<Album> albums = new HashSet<Album>();
 
 	protected Artist() {
 
+	}
+
+	public String toString() {
+		return name + " - " + imgUrl;
 	}
 
 	public Artist(String name, String imgUrl) {
@@ -35,14 +40,14 @@ public class Artist {
 		this.imgUrl = imgUrl;
 	}
 
-	public Set<Song> getSongs(){
+	public Set<Song> getSongs() {
 		return songs;
 	}
-	
-	public Set<Album> getAlbums(){
+
+	public Set<Album> getAlbums() {
 		return albums;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -57,8 +62,9 @@ public class Artist {
 
 	public void addSong(Song songToAdd) {
 		this.songs.add(songToAdd);
+		songToAdd.getArtists().add(this);
 	}
-	
+
 	public void addAlbum(Album albumToAdd) {
 		this.albums.add(albumToAdd);
 	}

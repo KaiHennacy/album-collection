@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -19,11 +20,11 @@ public class Song {
 	private String linkUrl;
 	private String duration;
 
-	 @ManyToMany(mappedBy = "songs")
-	 private Set<Artist> artists = new HashSet<Artist>();
+	@ManyToMany(mappedBy = "songs", fetch = FetchType.EAGER)
+	private Set<Artist> artists = new HashSet<Artist>();
 
-	 @ManyToMany
-	 private Set<Album> albums = new HashSet<Album>();
+	@ManyToMany(fetch = FetchType.EAGER)
+	private Set<Album> albums = new HashSet<Album>();
 
 	protected Song() {
 
@@ -34,27 +35,32 @@ public class Song {
 		this.linkUrl = linkUrl;
 		this.duration = duration;
 	}
-	
+
+	public String toString() {
+		return title + " - " + duration + " - " + linkUrl;
+	}
+
 	public String getTitle() {
 		return title;
 	}
-	
+
 	public String getLinkUrl() {
 		return linkUrl;
 	}
-	
+
 	public String getDuration() {
 		return duration;
 	}
+
 	public Long getId() {
 		return id;
 	}
-	
-	public Set<Artist> getArtists(){
+
+	public Set<Artist> getArtists() {
 		return artists;
 	}
-	
-	public Set<Album> getAlbums(){
+
+	public Set<Album> getAlbums() {
 		return albums;
 	}
 
@@ -82,6 +88,10 @@ public class Song {
 			return false;
 		return true;
 	}
-	
-	
+
+	public void addArtist(Artist artist) {
+		artists.add(artist);
+		artist.getSongs().add(this);
+	}
+
 }
