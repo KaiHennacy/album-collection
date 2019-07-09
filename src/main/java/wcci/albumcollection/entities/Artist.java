@@ -12,56 +12,56 @@ import javax.persistence.ManyToMany;
 
 @Entity
 public class Artist {
-	
+
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+
 	private String name;
 	private String imgUrl;
-	
-	// @ManyToMany
-	// private Set<Song> songs = new HashSet<Song>();
-	
-	// @ManyToMany
-	// private Set<Album> albums = new HashSet<Album>();
-	
-	protected Artist(){
-		
+
+	 @ManyToMany
+	 private Set<Song> songs = new HashSet<Song>();
+
+	 @ManyToMany
+	 private Set<Album> albums = new HashSet<Album>();
+
+	protected Artist() {
+
 	}
-	
+
 	public Artist(String name, String imgUrl) {
 		this.name = name;
-		this.imgUrl=imgUrl;
+		this.imgUrl = imgUrl;
+	}
+
+	public Set<Song> getSongs(){
+		return songs;
 	}
 	
-//	public Set<Song> getSongs(){
-//		return songs;
-//	}
-//	
-//	public Set<Album> getAlbums(){
-//		return albums;
-//	}
-//	
+	public Set<Album> getAlbums(){
+		return albums;
+	}
+	
 	public String getName() {
 		return name;
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
-	
+
 	public String getImgUrl() {
 		return imgUrl;
 	}
 
-//	public void addSong(Song songToAdd) {
-//		this.songs.add(songToAdd);
-//	}
-//	
-//	public void addAlbum(Album albumToAdd) {
-//		this.albums.add(albumToAdd);
-//	}
+	public void addSong(Song songToAdd) {
+		this.songs.add(songToAdd);
+	}
+	
+	public void addAlbum(Album albumToAdd) {
+		this.albums.add(albumToAdd);
+	}
 
 	@Override
 	public int hashCode() {
@@ -87,6 +87,5 @@ public class Artist {
 			return false;
 		return true;
 	}
-	
-	
+
 }

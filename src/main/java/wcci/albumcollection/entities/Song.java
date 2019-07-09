@@ -19,23 +19,21 @@ public class Song {
 	private String linkUrl;
 	private String duration;
 
-	// @ManyToMany(mappedBy = "songs")
-	// private Set<Artist> artists = new HashSet<Artist>();
+	 @ManyToMany(mappedBy = "songs")
+	 private Set<Artist> artists = new HashSet<Artist>();
 
-	// @ManyToMany
-	// private Set<Album> albums = new HashSet<Album>();
+	 @ManyToMany
+	 private Set<Album> albums = new HashSet<Album>();
 
 	protected Song() {
 
 	}
-//
-//	public Song(String title, String linkUrl, String duration, Set<Artist> artists, Set<Album> albums) {
-//		this.title = title;
-//		this.linkUrl = linkUrl;
-//		this.duration = duration;
-//		this.artists = artists;
-//		this.albums = albums;
-//	}
+
+	public Song(String title, String linkUrl, String duration) {
+		this.title = title;
+		this.linkUrl = linkUrl;
+		this.duration = duration;
+	}
 	
 	public String getTitle() {
 		return title;
@@ -48,14 +46,17 @@ public class Song {
 	public String getDuration() {
 		return duration;
 	}
+	public Long getId() {
+		return id;
+	}
 	
-//	public Set<Artist> getArtists(){
-//		return artists;
-//	}
-//	
-//	public Set<Album> getAlbums(){
-//		return albums;
-//	}
+	public Set<Artist> getArtists(){
+		return artists;
+	}
+	
+	public Set<Album> getAlbums(){
+		return albums;
+	}
 
 	@Override
 	public int hashCode() {

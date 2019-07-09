@@ -10,7 +10,9 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import wcci.albumcollection.entities.Album;
 import wcci.albumcollection.entities.Artist;
+import wcci.albumcollection.entities.Song;
 import wcci.albumcollection.repositories.AlbumRepository;
 import wcci.albumcollection.repositories.ArtistRepository;
 import wcci.albumcollection.repositories.SongRepository;
@@ -31,20 +33,39 @@ public class EntityMappingsTest {
 	@Autowired
 	SongRepository songRepo;
 	
+	private Artist testArtist = new Artist("Test-Name", "testImg.com");
+	private Song testSong = new Song("test-title", "test-link.com", "00:00");
+	private Album testAlbum = new Album("test-title", "testImg.com");
+	
 	@Test
 	public void shouldSaveAndLoadAnArtist() {
-		Artist testArtist = new Artist("Test Name", "testImg.com");
 		artistRepo.save(testArtist);
-		entityManager.persist("Test Name");
+		entityManager.persist(testArtist);
 		entityManager.flush();
 		
 		Artist foundArtist = artistRepo.findById(testArtist.getId()).get();
-		// assertThat(foundArtist, is(testArtist));
-		
-		
-		
-		
+		assertThat(foundArtist, is(testArtist));
 	}
+	
+	@Test
+	public void shouldSaveAndLoadAnSong() {
+		songRepo.save(testSong);
+		entityManager.persist(testSong);
+		entityManager.flush();
+		
+		Song foundSong = songRepo.findById(testSong.getId()).get();
+		assertThat(foundSong, is(testSong));
+	} 
+	
+	@Test
+	public void shouldSaveAndLoadAnAlbum() {
+		albumRepo.save(testAlbum);
+		entityManager.persist(testAlbum);
+		entityManager.flush();
+		
+		Album foundAlbum = albumRepo.findById(testAlbum.getId()).get();
+		assertThat(foundAlbum, is(testAlbum));
+	} 
 	
 	
 

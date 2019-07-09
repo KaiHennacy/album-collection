@@ -20,30 +20,28 @@ public class Album {
 	private String title;
 	private String imgUrl;
 
-	// @ManyToMany(mappedBy = "albums")
-	// private Set<Artist> artists = new HashSet<Artist>();
+	 @ManyToMany(mappedBy = "albums")
+	 private Set<Artist> artists = new HashSet<Artist>();
 
-	// @ManyToMany(mappedBy = "songs")
-	// private Set<Song> songs = new HashSet<Song>();
+	 @ManyToMany(mappedBy = "albums")
+	 private Set<Song> songs = new HashSet<Song>();
 
 	protected Album() {
 
 	}
 
-//	public Album(String title, Set<Artist> artists, Set<Song> songs, String imgUrl) {
-//		this.title = title;
-//		this.artists = artists;
-//		this.songs = songs;
-//		this.imgUrl = imgUrl;
-//	}
+	public Album(String title, String imgUrl) {
+		this.title = title;
+		this.imgUrl = imgUrl;
+	}
 
-//	public Set<Artist> getArtists() {
-//		return artists;
-//	}
-//
-//	public Set<Song> getSongs() {
-//		return songs;
-//	}
+	public Set<Artist> getArtists() {
+		return artists;
+	}
+
+	public Set<Song> getSongs() {
+		return songs;
+	}
 
 	public String getTitle() {
 		return title;
