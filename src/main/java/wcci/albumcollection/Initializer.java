@@ -23,46 +23,36 @@ public class Initializer implements CommandLineRunner {
 	@Autowired
 	SongRepository songRepo;
 
-	private AutoPopulator populator = new AutoPopulator();
+	@Autowired
+	private DefaultPopulator populator;
 
 	@Override
-	public void run(String... args) throws Exception {
+	public void run(String... args) throws Exception
+		{
 		System.out.println("RUNNING INITIALIZER");
+		populateDatabaseWithEntities();
+		}
 
-//		Artist testArtist = new Artist("Test-Name", "testImg.com");
-//		Song testSong = new Song("test-title", "test-link.com", "00:00");
-//		Album testAlbum = new Album("test-title", "testImg.com");
-//		
-//		albumRepo.save(testAlbum);
-//		songRepo.save(testSong);
-//		artistRepo.save(testArtist);
-//
-//		Song songFromRepo = songRepo.findById(testSong.getId()).get();
-//		Song song2 = new Song("Poop and Pee", "link", "duration");
-//		songRepo.save(song2);
-//
-//		Artist artistFromRepo = artistRepo.findById(testArtist.getId()).get();
-//
-//		artistFromRepo.addSong(songFromRepo);
-//
-//		artistFromRepo.addSong(song2);
-//		artistRepo.save(artistFromRepo);
-
-//		Song song = populator.generateRandomSong();
-//		System.out.println(song);
-//
-//		Album album = populator.generateRandomAlbum();
-//		System.out.println(album);
-//
-//		Artist artist = populator.generateRandomArtist();
-//		System.out.println(artist);
-
-		populator.createRandomSongsInDatabase(songRepo, 10);
-		populator.createRandomAlbumsInDatabase(albumRepo, 2);
-		populator.createRandomArtistsInDatabase(artistRepo, 3);
-		
-		populator.linkSongsAndArtists(artistRepo, songRepo);
-
-	}
-
+	private void populateDatabaseWithEntities()
+		{
+		System.out.println("Populating database with entities...");
+		int numberOfArtistsToCreate = 10;
+		int numberOfAlbumsToCreate = 40;
+		int numberOfSongsToCreate = 200;
+		long timeBeforeProcess = System.nanoTime();
+		populator.createRandomArtistsInDatabase(numberOfArtistsToCreate);
+		populator.createRandomAlbumsInDatabase(numberOfAlbumsToCreate);
+		populator.createRandomSongsInDatabase(numberOfSongsToCreate);
+		System.out.println("Randomly Linking songs and artists...");
+		populator.linkAllSongsToRandomArtists();
+		System.out.println("Randomly Linking songs and albums...");
+		populator.linkAllAlbumsToRandomSongs();
+		System.out.println("Randomly Linking albums and albums...");
+		populator.linkAllAlbumsToRandomArtists();
+		long timePostProcess = System.nanoTime();
+		long timeDifference = timePostProcess - timeBeforeProcess;
+		double convertedTime = 1.0 * timeDifference / 1000000000.0;
+		System.out.println("Complete!");
+		System.out.println("The process took " + convertedTime + " seconds.");
+		}
 }

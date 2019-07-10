@@ -21,11 +21,12 @@ public class AutoPopulator {
 	private static final Random RANDOM = new Random(System.nanoTime());
 	private static final Lorem LOREM = LoremIpsum.getInstance();
 
-	public AutoPopulator() {
+	public AutoPopulator()
+		{
+		}
 
-	}
-
-	public void linkSongsAndArtists(ArtistRepository artistRepo, SongRepository songRepo) {
+	public void linkSongsAndArtists(ArtistRepository artistRepo, SongRepository songRepo)
+		{
 		Set<Artist> artists = new HashSet<Artist>();
 		artistRepo.findAll().iterator().forEachRemaining(artists::add);
 //		Set<Song> songs = new HashSet<Song>();
@@ -33,110 +34,137 @@ public class AutoPopulator {
 
 		Iterable<Song> songs = songRepo.findAll();
 
-		for (Song song : songs) {
+		for (Song song : songs)
+			{
 			Set<Artist> artistsSubset = getRandomSubsetOfArtists(artists, 1 + RANDOM.nextInt());
 			linkSongWithArtists(artistsSubset, song, artistRepo);
+			}
 		}
-	}
 
-	public void linkSongWithArtists(Set<Artist> artists, Song song, ArtistRepository artistRepo) {
-		for (Artist artist : artists) {
+	public void linkSongWithArtists(Set<Artist> artists, Song song, ArtistRepository artistRepo)
+		{
+		for (Artist artist : artists)
+			{
 			Artist upToDateArtist = artistRepo.findById(artist.getId()).get();
 			upToDateArtist.addSong(song);
 			artistRepo.save(upToDateArtist);
+			}
 		}
-	}
 
-	public Set<Artist> getRandomSubsetOfArtists(Set<Artist> superSet, int subSetSize) {
-		if (subSetSize >= superSet.size()) {
+	public Set<Artist> getRandomSubsetOfArtists(Set<Artist> superSet, int subSetSize)
+		{
+		if (subSetSize >= superSet.size())
+			{
 			return superSet;
-		} else {
+			}
+		else
+			{
 			List<Artist> list = new LinkedList<Artist>(superSet);
 			Set<Artist> randomSubSet = new HashSet<Artist>();
 			int counter = 0;
-			while (!list.isEmpty() && counter < subSetSize) {
+			while (!list.isEmpty() && counter < subSetSize)
+				{
 				int index = RANDOM.nextInt(list.size());
 				randomSubSet.add(list.remove(index));
 				counter++;
-			}
+				}
 			return randomSubSet;
+			}
 		}
-	}
 
-	public Set<Song> getRandomSubsetOfSongs(Set<Song> superSet, int subSetSize) {
-		if (subSetSize >= superSet.size()) {
+	public Set<Song> getRandomSubsetOfSongs(Set<Song> superSet, int subSetSize)
+		{
+		if (subSetSize >= superSet.size())
+			{
 			return superSet;
-		} else {
+			}
+		else
+			{
 			List<Song> list = new LinkedList<Song>(superSet);
 			Set<Song> randomSubSet = new HashSet<Song>();
 			int counter = 0;
-			while (!list.isEmpty() && counter < subSetSize) {
+			while (!list.isEmpty() && counter < subSetSize)
+				{
 				int index = RANDOM.nextInt(list.size());
 				randomSubSet.add(list.remove(index));
 				counter++;
-			}
+				}
 			return randomSubSet;
+			}
 		}
-	}
 
-	public void createRandomAlbumsInDatabase(AlbumRepository albumRepo, int albumCount) {
-		for (int i = 0; i < albumCount; i++) {
+	public void createRandomAlbumsInDatabase(AlbumRepository albumRepo, int albumCount)
+		{
+		for (int i = 0; i < albumCount; i++)
+			{
 			Album album = generateRandomAlbum();
 			albumRepo.save(album);
+			}
 		}
-	}
 
-	public void createRandomArtistsInDatabase(ArtistRepository artistRepo, int artistCount) {
-		for (int i = 0; i < artistCount; i++) {
+	public void createRandomArtistsInDatabase(ArtistRepository artistRepo, int artistCount)
+		{
+		for (int i = 0; i < artistCount; i++)
+			{
 			Artist artist = generateRandomArtist();
 			artistRepo.save(artist);
+			}
 		}
-	}
 
-	public void createRandomSongsInDatabase(SongRepository songRepo, int songCount) {
-		for (int i = 0; i < songCount; i++) {
+	public void createRandomSongsInDatabase(SongRepository songRepo, int songCount)
+		{
+		for (int i = 0; i < songCount; i++)
+			{
 			Song song = generateRandomSong();
 			songRepo.save(song);
+			}
 		}
-	}
 
-	public Song generateRandomSong() {
+	public Song generateRandomSong()
+		{
 		String title = LOREM.getTitle(1 + RANDOM.nextInt(4));
 		String linkUrl = LOREM.getUrl();
 		String duration = generateRandomDuration();
 		Song song = new Song(title, linkUrl, duration);
 		return song;
-	}
+		}
 
-	public Album generateRandomAlbum() {
+	public Album generateRandomAlbum()
+		{
 		String title = LOREM.getTitle(1 + RANDOM.nextInt(6));
 		String imgUrl = LOREM.getUrl();
 		Album album = new Album(title, imgUrl);
 		return album;
-	}
+		}
 
-	public Artist generateRandomArtist() {
+	public Artist generateRandomArtist()
+		{
 		String name = LOREM.getName();
 		String imgUrl = LOREM.getUrl();
 		Artist artist = new Artist(name, imgUrl);
 		return artist;
-	}
+		}
 
-	public String generateRandomDuration() {
+	public String generateRandomDuration()
+		{
 		int minutes = RANDOM.nextInt(10);
 		int seconds = RANDOM.nextInt(60);
-		if (minutes == 0 && seconds == 0) {
+		if (minutes == 0 && seconds == 0)
+			{
 			minutes = 1;
 			seconds = 5;
-		}
+			}
 		String duration;
-		if (seconds < 10) {
+		if (seconds < 10)
+			{
 			duration = minutes + ":0" + seconds;
-		} else {
+			}
+		else
+			{
 			duration = minutes + ":" + seconds;
-		}
+			}
 
 		return duration;
-	}
+		}
 
 }

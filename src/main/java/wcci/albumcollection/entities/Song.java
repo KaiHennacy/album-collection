@@ -26,54 +26,65 @@ public class Song {
 	@ManyToMany(fetch = FetchType.EAGER)
 	private Set<Album> albums = new HashSet<Album>();
 
-	protected Song() {
+	protected Song()
+		{
 
-	}
+		}
 
-	public Song(String title, String linkUrl, String duration) {
+	public Song(String title, String linkUrl, String duration)
+		{
 		this.title = title;
 		this.linkUrl = linkUrl;
 		this.duration = duration;
-	}
+		}
 
-	public String toString() {
+	public String toString()
+		{
 		return title + " - " + duration + " - " + linkUrl;
-	}
+		}
 
-	public String getTitle() {
+	public String getTitle()
+		{
 		return title;
-	}
+		}
 
-	public String getLinkUrl() {
+	public String getLinkUrl()
+		{
 		return linkUrl;
-	}
+		}
 
-	public String getDuration() {
+	public String getDuration()
+		{
 		return duration;
-	}
+		}
 
-	public Long getId() {
+	public Long getId()
+		{
 		return id;
-	}
+		}
 
-	public Set<Artist> getArtists() {
+	public Set<Artist> getArtists()
+		{
 		return artists;
-	}
+		}
 
-	public Set<Album> getAlbums() {
+	public Set<Album> getAlbums()
+		{
 		return albums;
-	}
+		}
 
 	@Override
-	public int hashCode() {
+	public int hashCode()
+		{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
-	}
+		}
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(Object obj)
+		{
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -81,17 +92,26 @@ public class Song {
 		if (getClass() != obj.getClass())
 			return false;
 		Song other = (Song) obj;
-		if (id == null) {
+		if (id == null)
+			{
 			if (other.id != null)
 				return false;
-		} else if (!id.equals(other.id))
+			}
+		else if (!id.equals(other.id))
 			return false;
 		return true;
-	}
+		}
 
-	public void addArtist(Artist artist) {
+	public void addArtist(Artist artist)
+		{
 		artists.add(artist);
 		artist.getSongs().add(this);
-	}
+		}
+
+	public void addAlbum(Album album)
+		{
+		albums.add(album);
+		album.getSongs().add(this);
+		}
 
 }
