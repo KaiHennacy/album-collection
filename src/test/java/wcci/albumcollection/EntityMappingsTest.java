@@ -50,9 +50,7 @@ public class EntityMappingsTest {
 	
 	@Test
 	public void shouldSaveAndLoadAnArtist() {
-//		artistRepo.save(testArtist);
-//		entityManager.persist(testArtist);
-//		entityManager.flush();
+
 		
 		Artist foundArtist = artistRepo.findById(testArtist.getId()).get();
 		assertThat(foundArtist, is(testArtist));
@@ -60,9 +58,7 @@ public class EntityMappingsTest {
 	
 	@Test
 	public void shouldSaveAndLoadAnSong() {
-//		songRepo.save(testSong);
-//		entityManager.persist(testSong);
-//		entityManager.flush();
+
 		
 		Song foundSong = songRepo.findById(testSong.getId()).get();
 		assertThat(foundSong, is(testSong));
@@ -70,9 +66,7 @@ public class EntityMappingsTest {
 	
 	@Test
 	public void shouldSaveAndLoadAnAlbum() {
-//		albumRepo.save(testAlbum);
-//		entityManager.persist(testAlbum);
-//		entityManager.flush();
+
 		
 		Album foundAlbum = albumRepo.findById(testAlbum.getId()).get();
 		assertThat(foundAlbum, is(testAlbum));
@@ -87,10 +81,9 @@ public class EntityMappingsTest {
 		entityManager.flush();
 		entityManager.clear();
 		
-//		Song loadedSong = songRepo.findById(testSong.getId()).get();
-		
 		
 	}
 	
 
 }
+

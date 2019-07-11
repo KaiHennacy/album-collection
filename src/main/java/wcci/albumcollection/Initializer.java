@@ -37,8 +37,8 @@ public class Initializer implements CommandLineRunner {
 		{
 		System.out.println("Populating database with entities...");
 		int numberOfArtistsToCreate = 10;
-		int numberOfAlbumsToCreate = 40;
-		int numberOfSongsToCreate = 200;
+		int numberOfAlbumsToCreate = 20;
+		int numberOfSongsToCreate = 100;
 		long timeBeforeProcess = System.nanoTime();
 		populator.createRandomArtistsInDatabase(numberOfArtistsToCreate);
 		populator.createRandomAlbumsInDatabase(numberOfAlbumsToCreate);
