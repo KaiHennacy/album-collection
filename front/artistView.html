@@ -4,14 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Spotify Freemium</title>
+    <title>Stonkify Freemium</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="./css/base/reset.css" />
     <link rel="stylesheet" type="text/css" href="./css/base/base.css" />
     <link rel="stylesheet" type="text/css" href="./css/base/header.css" />
+    <link rel="stylesheet" type="text/css" href="./css/base/footer.css" />
     <link rel="stylesheet" type="text/css" href="./css/specific/albums.css" />
 </head>
 <body>
+<div class="wrapper">
     <header></header>
     <main>
         <div class=artist-profile>
@@ -20,6 +22,7 @@
                 <h1>Frank Zappa</h1>
                 <nav>
                     <ul>
+                        <li><a lass="play-button">play</a></li>
                         <li><a>about</a></li>
                         <li><a>related</a></li>
                     </ul>
@@ -36,14 +39,14 @@
             </div>
             <div class="album-box">
                     <figure class="album-cover">
-                        <img src="http://www.progarchives.com/progressive_rock_discography_covers/1023/cover_15421822122018_r.jpg">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3a/Sheik_Yerbouti.jpeg/220px-Sheik_Yerbouti.jpeg">
                     </figure>
                     <a href=""><h3>The Roxy Performances (Live)</h3></a>
                     <a href=""><h3>Frank Zappa</h3></a>
             </div>
             <div class="album-box">
                     <figure class="album-cover">
-                        <img src="http://www.progarchives.com/progressive_rock_discography_covers/1023/cover_15421822122018_r.jpg">
+                        <img src="https://images-na.ssl-images-amazon.com/images/I/81rQI9HJvSL._SX355_.jpg">
                     </figure>
                     <a href=""><h3>The Roxy Performances (Live)</h3></a>
                     <a href=""><h3>Frank Zappa</h3></a>
@@ -51,7 +54,11 @@
             
         </div>
         <button class=expand><span>Show More<svg width="16" height="10" viewBox="0 0 16 10" xmlns="http://www.w3.org/2000/svg"><title>Down</title><path d="M8 9.77L.62 1.13l.76-.65L8 8.23 14.62.48l.76.65" fill="currentColor" fill-rule="evenodd"></path></svg></span></button>
+    </div>
     </main>
+    <footer class="footer">
+        <small>&copy;2019 Stonkify Freemium</small>
+    </footer>
     <script type="text/javascript" src="./js/app.js"></script>
 </body>
 </html>

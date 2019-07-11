@@ -117,109 +117,79 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"js/utils/NavBar.js":[function(require,module,exports) {
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+})({"../../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+var bundleURL = null;
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var NavBar =
-/*#__PURE__*/
-function () {
-  function NavBar() {
-    _classCallCheck(this, NavBar);
+function getBundleURLCached() {
+  if (!bundleURL) {
+    bundleURL = getBundleURL();
   }
 
-  _createClass(NavBar, [{
-    key: "createElement",
-    value: function createElement(elementType) {
-      if (!elementType) {
-        throw new Error('Must pass valid HTML Element');
+  return bundleURL;
+}
+
+function getBundleURL() {
+  // Attempt to find the URL of the current script and use that as the base URL
+  try {
+    throw new Error();
+  } catch (err) {
+    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
+
+    if (matches) {
+      return getBaseURL(matches[0]);
+    }
+  }
+
+  return '/';
+}
+
+function getBaseURL(url) {
+  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
+}
+
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+},{}],"../../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
+var bundle = require('./bundle-url');
+
+function updateLink(link) {
+  var newLink = link.cloneNode();
+
+  newLink.onload = function () {
+    link.remove();
+  };
+
+  newLink.href = link.href.split('?')[0] + '?' + Date.now();
+  link.parentNode.insertBefore(newLink, link.nextSibling);
+}
+
+var cssTimeout = null;
+
+function reloadCSS() {
+  if (cssTimeout) {
+    return;
+  }
+
+  cssTimeout = setTimeout(function () {
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
+
+    for (var i = 0; i < links.length; i++) {
+      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
+        updateLink(links[i]);
       }
-
-      var createdElement = document.createElement(elementType);
-      return createdElement;
     }
-  }, {
-    key: "createNavBar",
-    value: function createNavBar() {
-      var _this = this;
 
-      var navElement = this.createElement('nav');
-      var ulElement = this.createElement('ul');
-      var menuButton = this.createElement('button');
-      var liElements;
-      var articles = ['home', 'other'];
-      navElement.classList.add('nav');
-      liElements = articles.map(function (article) {
-        var liElement = document.createElement('li');
-        var sectionBtn = document.createElement('button');
-        sectionBtn.textContent = article.charAt(0).toUpperCase() + article.slice(1);
-        sectionBtn.addEventListener('click', function () {
-          _this.toggleHidden(article);
-        });
-        liElement.classList.add('nav_list-item');
-        liElement.appendChild(sectionBtn);
-        return liElement;
-      });
-      ulElement.classList.add('nav_list');
-      ulElement.classList.toggle('hidden');
-      liElements.forEach(function (element) {
-        ulElement.appendChild(element);
-      });
-      menuButton.classList.add('nav_button');
-      menuButton.textContent = 'MENU';
-      menuButton.addEventListener('click', function () {
-        menuButton.textContent = 'MENU';
-        ulElement.classList.toggle('hidden');
+    cssTimeout = null;
+  }, 50);
+}
 
-        if (!ulElement.classList.contains('hidden')) {
-          menuButton.textContent = 'MENU ^';
-        }
-      });
-      window.addEventListener('click', function (event) {
-        console.log(event);
+module.exports = reloadCSS;
+},{"./bundle-url":"../../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"css/base/footer.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
 
-        if (!event.target.matches('button') && !ulElement.classList.contains('hidden')) {
-          ulElement.classList.toggle('hidden');
-          menuButton.textContent = 'MENU';
-        }
-      });
-      navElement.appendChild(menuButton);
-      navElement.appendChild(ulElement);
-      return navElement;
-    }
-  }, {
-    key: "toggleHidden",
-    value: function toggleHidden(article) {
-      var articles = document.getElementsByTagName('ARTICLE');
-
-      for (var i = 0; i < articles.length; i++) {
-        if (!articles.item(i).classList.contains('hidden')) {
-          articles.item(i).classList.toggle('hidden');
-        }
-
-        if (articles.item(i).classList.contains("".concat(article))) {
-          articles.item(i).classList.toggle('hidden');
-        }
-      }
-
-      return articles;
-    }
-  }]);
-
-  return NavBar;
-}();
-
-module.exports = NavBar;
-},{}],"js/app.js":[function(require,module,exports) {
-var NavBar = require('./utils/NavBar');
-
-var navBar = new NavBar();
-var header = document.getElementsByTagName('header')[0];
-header.appendChild(navBar.createNavBar());
-},{"./utils/NavBar":"js/utils/NavBar.js"}],"../../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -422,5 +392,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","js/app.js"], null)
-//# sourceMappingURL=/app.c3f9f951.js.map
+},{}]},{},["../../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js"], null)
+//# sourceMappingURL=/footer.eb381906.js.map

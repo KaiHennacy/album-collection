@@ -1,0 +1,11 @@
+.footer{
+    min-height: 10vh;
+    background-color: #2a3b47ce;
+    color: whitesmoke;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2em;
+}
+
+/*# sourceMappingURL=/footer.eb381906.css.map */
