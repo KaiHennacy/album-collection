@@ -1,0 +1,96 @@
+package wcci.albumcollection.entities;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+@Entity
+public class Artist {
+
+	@Id
+	@GeneratedValue
+	private Long id;
+
+	private String name;
+	private String imgUrl;
+
+//	@ManyToMany(fetch = FetchType.EAGER)
+//	private Set<Song> songs = new HashSet<Song>();
+
+	@OneToMany(mappedBy = "artist")
+//	(fetch = FetchType.EAGER)
+	private Set<Album> albums = new HashSet<Album>();
+
+	protected Artist() {
+
+	}
+
+	public String toString() {
+		return name + " - " + imgUrl;
+	}
+
+	public Artist(String name, String imgUrl) {
+		this.name = name;
+		this.imgUrl = imgUrl;
+	}
+
+//	public Set<Song> getSongs() {
+//		return songs;
+//	}
+
+	public Set<Album> getAlbums() {
+		return albums;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public String getImgUrl() {
+		return imgUrl;
+	}
+
+//	public void addSong(Song songToAdd) {
+//		this.songs.add(songToAdd);
+//		songToAdd.getArtists().add(this);
+//	}
+
+	public void addAlbum(Album albumToAdd) {
+		this.albums.add(albumToAdd);
+		System.out.println(albumToAdd.getArtist());
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Artist other = (Artist) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+
+}
