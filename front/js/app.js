@@ -1,7 +1,7 @@
-const NavBar = require('./utils/NavBar')
+const NavBar = require("./components/NavBar");
 
-const navBar = new NavBar()
+const navBar = new NavBar();
 
-const header = document.getElementsByTagName('header')[0]
+const header = document.getElementsByTagName("header")[0];
 
-header.appendChild(navBar.createNavBar())
+header.appendChild(navBar.createNavBar());

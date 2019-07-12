@@ -1,0 +1,5 @@
+.main {
+  flex-grow: 1; /* using flex-grow here makes the main take up remaining free space, pushing the footer to the bottom of the container if the content wouldn't otherwise do so. */
+  min-height: 100%;
+  background-color: var(--primary---max);
+}
