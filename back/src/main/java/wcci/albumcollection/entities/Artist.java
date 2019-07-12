@@ -37,6 +37,11 @@ public class Artist {
 		this.name = name;
 		this.imgUrl = imgUrl;
 	}
+	
+	public Artist(String name) {
+		this.name = name;
+		this.imgUrl = "defaultImg.png";
+	}
 
 //	public Set<Song> getSongs() {
 //		return songs;

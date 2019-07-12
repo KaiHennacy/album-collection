@@ -36,6 +36,14 @@ public class Song {
 		this.duration = duration;
 		this.album = album;
 		}
+	
+	public Song(String title, Album album)
+		{
+		this.title = title;
+		this.linkUrl = "defaultLink.com";
+		this.duration = "00:00";
+		this.album = album;
+		}
 
 	public String toString()
 		{

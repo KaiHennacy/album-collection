@@ -4,9 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import wcci.albumcollection.entities.Album;
-import wcci.albumcollection.entities.Artist;
-import wcci.albumcollection.entities.Song;
 import wcci.albumcollection.repositories.AlbumRepository;
 import wcci.albumcollection.repositories.ArtistRepository;
 import wcci.albumcollection.repositories.SongRepository;
@@ -30,8 +27,24 @@ public class Initializer implements CommandLineRunner {
 	public void run(String... args) throws Exception
 		{
 		System.out.println("RUNNING INITIALIZER");
+//		this.makeArtists("Frank Zappa", "Dolly Parton", "James Brown");
 //		populateDatabaseWithEntities();
 		}
+
+//	private void makeArtists(String... names) {
+//		for(String name : names) {
+//			Artist newArtist = new Artist(name);
+//			artistRepo.save(newArtist);
+//		}
+//	}
+//	private void makeAlbums(String... titles) {
+//		for(String title : titles) {
+//			Album 
+//			artistRepo.save(newArtist);
+//		}
+//	}
+	
+	
 
 //	private void populateDatabaseWithEntities()
 //		{

@@ -49,6 +49,13 @@ public class Album {
 		this.imgUrl = imgUrl;
 		this.artist = artist;
 		}
+	
+	public Album(String title, Artist artist)
+		{
+		this.title = title;
+		this.imgUrl = "defaultImg.png";
+		this.artist = artist;
+		}
 
 	public Artist getArtist()
 		{
@@ -73,6 +80,11 @@ public class Album {
 	public String getImgUrl()
 		{
 		return imgUrl;
+		}
+	
+	public void setArtist(Artist artist) 
+		{
+		this.artist = artist;
 		}
 
 	@Override
@@ -103,5 +115,4 @@ public class Album {
 			return false;
 		return true;
 		}
-
 }

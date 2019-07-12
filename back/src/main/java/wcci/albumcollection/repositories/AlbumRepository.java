@@ -8,4 +8,8 @@ import wcci.albumcollection.entities.Album;
 @Repository
 public interface AlbumRepository extends CrudRepository<Album, Long>{
 
+	Album findByTitle(String albumTitle);
+
+	boolean existsByTitle(String albumTitle);
+
 }
